@@ -4,7 +4,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
     app:startDestination="@id/categoryFragment">
-
     <fragment
         android:id="@+id/categoryFragment"
         android:name="com.example.cocukeglenceapp.view.CategoryFragment"
@@ -19,17 +18,23 @@
         android:name="com.example.cocukeglenceapp.view.ListFragment"
         android:label="fragment_list"
         tools:layout="@layout/fragment_list" >
-        <argument
-            android:name="icerikId"
-            app:argType="integer"
-            android:defaultValue="0" />
         <action
             android:id="@+id/action_listFragment_to_contentFragment"
             app:destination="@id/contentFragment" />
+        <argument
+            android:name="categoryName"
+            app:argType="string" />
+        <argument
+            android:name="category_name"
+            app:argType="string" />
     </fragment>
     <fragment
         android:id="@+id/contentFragment"
         android:name="com.example.cocukeglenceapp.view.ContentFragment"
         android:label="fragment_content"
-        tools:layout="@layout/fragment_content" />
+        tools:layout="@layout/fragment_content" >
+        <argument
+            android:name="contentDetail"
+            app:argType="android.text.style.AbsoluteSizeSpan" />
+    </fragment>
 </navigation>

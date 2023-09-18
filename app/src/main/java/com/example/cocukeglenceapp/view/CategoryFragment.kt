@@ -13,14 +13,16 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.cocukeglenceapp.R
+import androidx.navigation.fragment.findNavController
 import com.example.cocukeglenceapp.adapter.CategoryAdapter
 import com.example.cocukeglenceapp.databinding.FragmentCategoryBinding
 import com.example.cocukeglenceapp.model.Categories
 import com.example.cocukeglenceapp.viewmodel.CategoryViewModel
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
-import androidx.navigation.fragment.findNavController
 import com.google.android.material.snackbar.Snackbar
+import androidx.navigation.fragment.findNavController
+
 
 
 class CategoryFragment : Fragment() {
@@ -62,11 +64,19 @@ class CategoryFragment : Fragment() {
 
         binding.categoryRV.layoutManager = LinearLayoutManager(requireContext())//recyclerview'ı ayarlama
 
-        categoryadapter = CategoryAdapter() // tamamlanacak
-        viewModel.uploadCategories(refCategory)
+        //categoryadapter = CategoryAdapter() // tamamlanacak
+        //viewModel.uploadCategories(refCategory)
         //observeLiveData()
 }
 
+
+    fun navigateToCategoryDetail(categoryName: String) {
+        // 1. Geçiş işlemi için bir action oluşturun, bu action Navigation Graph dosyasında tanımlanmalıdır.
+        val action = CategoryFragmentDirections.navigateToCategoryDetailFragment(categoryName)
+
+        // 2. NavController ile yeni fragment'a geçişi başlatın.
+        findNavController().navigate(action)
+    }
     private fun navigateToLis(category: Categories) {
         val action = CategoryFragmentDirections.navigateToList(category.category_name)
         findNavController().navigate(action)
